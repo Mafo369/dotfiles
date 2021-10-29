@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/mafo/ups/Parallelisme'
+let g:netrw_dirhist_2='/home/mafo/ups'
+let g:netrw_dirhist_1='/home/mafo'
+let g:netrw_dirhist_0='/home/mafo/.config/nvim'
+let g:netrw_dirhist_9='/home/mafo/.config'
+let g:netrw_dirhist_8='/home/mafo'
+let g:netrw_dirhist_7='/home/mafo/.vim/plugged/coc.nvim/data'
+let g:netrw_dirhist_6='/home/mafo'
+let g:netrw_dirhist_5='/home/mafo/.vim/plugged/coc.nvim/data'
+let g:netrw_dirhist_4='/home/mafo'
