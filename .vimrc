@@ -77,11 +77,6 @@ nnoremap <leader>u :UndotreeShow<CR>
 nnoremap <leader>s :wincmd v<CR>
 nnoremap <leader>sh :split<CR>
 nnoremap <Leader>rg :Rg<SPACE>
-nnoremap <leader>ps :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
-map <C-N> :bnext<CR>
 map <C-P> :bprev<CR>
-imap <C-N> <Esc>:bnext<CR>i
-imap <C-P> <Esc>:bprev<CR>i
-

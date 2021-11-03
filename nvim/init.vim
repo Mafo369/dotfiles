@@ -222,6 +222,7 @@ let g:nvim_tree_icons = {
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
+nnoremap <leader>o :NvimTreeOpen<CR>
 
 highlight NvimTreeFolderIcon guibg=blue
 
