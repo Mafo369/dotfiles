@@ -1,8 +1,10 @@
 # dotfiles
 
-# Key Shortcuts:
+Zsh, Nvim, Tmux
 
-Vim/Nvim:
+<h1>Key Shortcuts:</h1>
+
+<h2>Vim/Nvim:</h2>
 
 Leader: <Space>
 
