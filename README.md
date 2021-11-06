@@ -2,9 +2,11 @@
 
 Zsh, Nvim, Tmux
 
-<h1>Key Shortcuts:</h1>
+## Key Shortcuts:
 
-<h2>Vim/Nvim:</h2>
+Vim/Nvim:
+
+```bash
 
 Leader: <Space>
 
@@ -58,3 +60,4 @@ NvimTree:
   <Leader>r :NvimTreeRefresh
   <Leader>n :NvimTreeFindFile
   <Leader>o :NvimTreeOpen
+```
