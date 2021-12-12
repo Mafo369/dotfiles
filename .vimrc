@@ -1,6 +1,9 @@
 let python_highlight_all=1
 syntax on
 
+filetype plugin on
+filetype indent on
+
 set fillchars+=vert:\|
 set nocompatible
 set encoding=utf-8
@@ -23,6 +26,13 @@ set incsearch
 
 set colorcolumn=80
 
+augroup CoqtailHighlights
+  autocmd!
+  autocmd ColorScheme *
+    \  hi def CoqtailChecked ctermbg=217 guibg=Grey
+    \| hi def CoqtailSent    ctermbg=260 guibg=Grey
+augroup END
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
@@ -35,7 +45,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'vim-syntastic/syntastic'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'nvim-telescope/telescope-fzy-native.nvim'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim'
@@ -46,10 +55,12 @@ if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 endif
 
+Plug 'whonore/Coqtail'
+
 call plug#end()
 
-set termguicolors
-colorscheme gruvbox
+"set termguicolors
+"colorscheme gruvbox
 
 set noshowmode
 set laststatus=1
@@ -80,3 +91,5 @@ nnoremap <Leader>rg :Rg<SPACE>
 nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 map <C-P> :bprev<CR>
+
+

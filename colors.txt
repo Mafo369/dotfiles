@@ -1,0 +1,1 @@
+default dracula bg = #282A36

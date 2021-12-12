@@ -2,6 +2,39 @@ set runtimepath^=~/.vim runtimepath+=~/.vim/after
 let &packpath = &runtimepath
 source ~/.vimrc
 
+set termguicolors
+
+let g:theprimeagen_colorscheme = "gruvbox"
+fun! ColorMyPencils()
+    let g:gruvbox_contrast_dark = 'hard'
+    if exists('+termguicolors')
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+    endif
+    let g:gruvbox_invert_selection='0'
+
+    set background=dark
+    if has('nvim')
+        call luaeval('vim.cmd("colorscheme " .. _A[1])', [g:theprimeagen_colorscheme])
+    else
+        " TODO: What the way to use g:theprimeagen_colorscheme
+        colorscheme gruvbox
+    endif
+
+    highlight ColorColumn ctermbg=0 guibg=grey
+    hi SignColumn guibg=none
+    hi CursorLineNR guibg=None
+    highlight Normal guibg=none
+    " highlight LineNr guifg=#ff8659
+    " highlight LineNr guifg=#aed75f
+    highlight LineNr guifg=#5eacd3
+    highlight netrwDir guifg=#5eacd3
+    highlight qfFileName guifg=#aed75f
+    hi TelescopeBorder guifg=#5eacd
+endfun
+call ColorMyPencils()
+
+
 hi! CocErrorSign guifg=#d1666a ctermfg=124
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim using some
@@ -153,7 +186,6 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 
-let g:nvim_tree_gitignore = 1 "0 by default
 let g:nvim_tree_quit_on_open = 1 "0 by default, closes the tree when you open a file
 let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
 let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
@@ -229,6 +261,7 @@ highlight NvimTreeFolderIcon guibg=blue
 lua require("theprimeagen")
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true } }
 highlight IconNameDevicon guifg='<color>'
+
 
 
 " Mappings for CoCList
