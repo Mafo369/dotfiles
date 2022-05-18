@@ -4,6 +4,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/mafo/.oh-my-zsh"
 
+export GUROBI_HOME="/home/mafo/dev/gurobi951/linux64"
+export PATH="${PATH}:${GUROBI_HOME}/bin"
+export LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:${GUROBI_HOME}/lib"
+export GRB_LICENSE_FILE="/home/mafo/gurobi.lic"
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME

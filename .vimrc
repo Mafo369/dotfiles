@@ -26,6 +26,8 @@ set incsearch
 
 set colorcolumn=80
 
+set clipboard+=unnamedplus
+
 augroup CoqtailHighlights
   autocmd!
   autocmd ColorScheme *
@@ -37,22 +39,22 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
 Plug 'vim-utils/vim-man'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mbbill/undotree'
-Plug 'sheerun/vim-polyglot'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/indentpython.vim'
-Plug 'vim-syntastic/syntastic'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'nvim-telescope/telescope-fzy-native.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'kyazdani42/nvim-web-devicons'
-Plug 'kyazdani42/nvim-tree.lua'
+Plug 'cdelledonne/vim-cmake'
+Plug 'tpope/vim-surround'
 
 if has('nvim')
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'nvim-telescope/telescope-fzy-native.nvim'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'kyazdani42/nvim-web-devicons'
+  Plug 'kyazdani42/nvim-tree.lua'
+  Plug 'antoinemadec/FixCursorHold.nvim'
 endif
 
 Plug 'whonore/Coqtail'
@@ -92,4 +94,9 @@ nnoremap <Leader>+ :vertical resize +5<CR>
 nnoremap <Leader>- :vertical resize -5<CR>
 map <C-P> :bprev<CR>
 
+nmap <leader>cg :CMakeGenerate<cr>
+nmap <leader>cb :CMakeBuild<cr>
+nmap <leader>cc :CMakeClose<cr>
 
+let g:cmake_default_config = 'build-Release'
+let g:cmake_build_options = ['-j6']
