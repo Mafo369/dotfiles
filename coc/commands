@@ -1,3 +1,6 @@
+snippets.editSnippets
+snippets.openSnippetFiles
+workspace.showOutput
 clangd.install
 workspace.showOutput
 clangd.update

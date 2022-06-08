@@ -28,13 +28,6 @@ set colorcolumn=80
 
 set clipboard+=unnamedplus
 
-augroup CoqtailHighlights
-  autocmd!
-  autocmd ColorScheme *
-    \  hi def CoqtailChecked ctermbg=217 guibg=Grey
-    \| hi def CoqtailSent    ctermbg=260 guibg=Grey
-augroup END
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
@@ -45,8 +38,14 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'cdelledonne/vim-cmake'
 Plug 'tpope/vim-surround'
+Plug 'derekwyatt/vim-fswitch'
+Plug 'honza/vim-snippets'
 
 if has('nvim')
+  Plug 'mfussenegger/nvim-dap'
+  Plug 'rcarriga/nvim-dap-ui'
+  Plug 'theHamsta/nvim-dap-virtual-text'
+  Plug 'nvim-telescope/telescope-dap.nvim'
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'neoclide/coc.nvim', {'branch': 'release'}
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
@@ -57,26 +56,13 @@ if has('nvim')
   Plug 'antoinemadec/FixCursorHold.nvim'
 endif
 
-Plug 'whonore/Coqtail'
-
 call plug#end()
-
-"set termguicolors
-"colorscheme gruvbox
 
 set noshowmode
 set laststatus=1
 set wildmenu
 
 let mapleader=" "
-let g:netrw_browse_split=2
-let g:netrw_banner=0
-let g:netrw_winsize=25
-let g:netrw_liststyle=3
-
-let g:ctrlp_use_caching=0
-let g:ctrlp_map = '<Leader>,'
-nmap <Leader>; :CtrlPBuffer<CR>
 
 let g:airline_powerline_fonts = 0
 let g:airline_theme='base16_gruvbox_dark_hard'
@@ -100,3 +86,13 @@ nmap <leader>cc :CMakeClose<cr>
 
 let g:cmake_default_config = 'build-Release'
 let g:cmake_build_options = ['-j6']
+
+au BufEnter *.h  let b:fswitchdst = "c,cpp,cc,m"
+au BufEnter *.cc let b:fswitchdst = "h,hpp"
+au BufEnter *.h let b:fswitchdst = 'c,cpp,m,cc' | let b:fswitchlocs = 'reg:|include.*|src/**|'
+nnoremap <silent> <leader>of :FSHere<cr>
+" Extra hotkeys to open header/source in the split
+nnoremap <silent> <leader>oh :FSSplitLeft<cr>
+nnoremap <silent> <leader>ol :FSSplitRight<cr>
+
+vnoremap <C-r> "hy:%s/<C-r>h//g<left><left><left>
