@@ -215,7 +215,6 @@ let g:cursorhold_updatetime = 100
 
 "DAP--
 lua << EOF
-    require('dap')
     vim.fn.sign_define('DapBreakpoint', {text='🛑', texthl='', linehl='', numhl=''})
     vim.keymap.set('n', '<F2>', function()
       require'dapui'.close()
@@ -223,6 +222,7 @@ lua << EOF
       require'dap'.repl.close()
     end, {desc= 'Termiante DAP env'})  
 EOF
+nnoremap <silent> <Leader>vt <Cmd>lua require("nvim-dap-virtual-text").refresh() <CR>
 nnoremap <silent> <F5> <Cmd>lua require'dap'.continue()<CR>
 nnoremap <silent> <F6> <Cmd>lua require'dap'.step_over()<CR>
 nnoremap <silent> <F7> <Cmd>lua require'dap'.step_into()<CR>
