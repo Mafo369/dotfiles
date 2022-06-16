@@ -39,18 +39,35 @@ Plug 'vim-scripts/indentpython.vim'
 Plug 'cdelledonne/vim-cmake'
 Plug 'tpope/vim-surround'
 Plug 'derekwyatt/vim-fswitch'
-Plug 'honza/vim-snippets'
 
 if has('nvim')
+  Plug 'windwp/nvim-autopairs'
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'tami5/lspsaga.nvim'
+  Plug 'onsails/lspkind.nvim'
+
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  "Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
+
+  Plug 'L3MON4D3/LuaSnip'
+  Plug 'saadparwaiz1/cmp_luasnip'
+  Plug 'rafamadriz/friendly-snippets'
+
   Plug 'mfussenegger/nvim-dap'
   Plug 'rcarriga/nvim-dap-ui'
   Plug 'theHamsta/nvim-dap-virtual-text'
-  Plug 'nvim-telescope/telescope-dap.nvim'
-  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
-  Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
   Plug 'nvim-lua/plenary.nvim'
   Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-dap.nvim'
+  Plug 'nvim-telescope/telescope-fzy-native.nvim'
+
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'kyazdani42/nvim-tree.lua'
   Plug 'antoinemadec/FixCursorHold.nvim'
