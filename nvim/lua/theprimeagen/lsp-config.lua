@@ -18,16 +18,13 @@ local on_attach = function(client, bufnr)
   local bufopts = { noremap=true, silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  --vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<leader>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, bufopts)
   vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, bufopts)
-  --vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
   vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<leader>f', vim.lsp.buf.formatting, bufopts)
@@ -39,6 +36,12 @@ local lsp_flags = {
 }
 
 require('lspconfig')['ccls'].setup{
+    capabilities = capabilities,
+    on_attach = on_attach,
+    flags = lsp_flags
+}
+
+require('lspconfig')['pyright'].setup{
     capabilities = capabilities,
     on_attach = on_attach,
     flags = lsp_flags
@@ -154,41 +157,58 @@ cmp.setup({
      documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
+    ["<tab>"] = cmp.mapping.select_next_item(),
+    ["<C-p>"] = cmp.mapping.select_prev_item(), 
     ['<C-b>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+    ["<C-space>"] = cmp.mapping {
+      i = cmp.mapping.complete(),
+      c = function(
+        _ --[[fallback]]
+      )
+        if cmp.visible() then
+          if not cmp.confirm { select = true } then
+            return
+          end
+        else
+          cmp.complete()
+        end
+      end,
+    },
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-    ["<Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_next_item()
-          elseif luasnip.expand_or_jumpable() then
-            luasnip.expand_or_jump()
-          elseif has_words_before() then
-            cmp.complete()
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
+    --["<Tab>"] = cmp.mapping(function(fallback)
+    --      if cmp.visible() then
+    --        cmp.select_next_item()
+    --      elseif luasnip.expand_or_jumpable() then
+    --        luasnip.expand_or_jump()
+    --      elseif has_words_before() then
+    --        cmp.complete()
+    --      else
+    --        fallback()
+    --      end
+    --    end, { "i", "s" }),
 
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            cmp.select_prev_item()
-          elseif luasnip.jumpable(-1) then
-            luasnip.jump(-1)
-          else
-            fallback()
-          end
-        end, { "i", "s" }),
+    --    ["<S-Tab>"] = cmp.mapping(function(fallback)
+    --      if cmp.visible() then
+    --        cmp.select_prev_item()
+    --      elseif luasnip.jumpable(-1) then
+    --        luasnip.jump(-1)
+    --      else
+    --        fallback()
+    --      end
+    --    end, { "i", "s" }),
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'treesitter' },
-    { name = 'path' },
     { name = 'luasnip' }, -- For luasnip users.
+    { name = 'nvim_lsp' },
     { name = 'nvim_lsp_signature_help' },
-    { name = 'buffer' },
+    { name = 'path' },
+    { name = 'buffer' , keyword_length = 5 },
   }),
+  experimental = {
+    ghost_text = true,
+  }
 })
 
 -- Set configuration for specific filetype.
@@ -217,3 +237,19 @@ cmp.setup.filetype('gitcommit', {
 --    { name = 'cmdline' }
 --  })
 --})
+
+-- <c-k> is my expansion key
+-- this will expand the current item or jump to the next item within the snippet.
+vim.keymap.set({ "i", "s" }, "<c-k>", function()
+  if luasnip.expand_or_jumpable() then
+    luasnip.expand_or_jump()
+  end
+end, { silent = true })
+
+-- <c-j> is my jump backwards key.
+-- this always moves to the previous item within the snippet
+vim.keymap.set({ "i", "s" }, "<c-j>", function()
+  if luasnip.jumpable(-1) then
+    luasnip.jump(-1)
+  end
+end, { silent = true })

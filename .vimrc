@@ -28,6 +28,9 @@ set colorcolumn=80
 
 set clipboard+=unnamedplus
 
+set number
+set relativenumber
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'gruvbox-community/gruvbox'
@@ -67,6 +70,8 @@ if has('nvim')
   Plug 'nvim-telescope/telescope-fzy-native.nvim'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+  Plug 'nvim-treesitter/nvim-treesitter-refactor'
 
   Plug 'kyazdani42/nvim-web-devicons'
   Plug 'kyazdani42/nvim-tree.lua'
