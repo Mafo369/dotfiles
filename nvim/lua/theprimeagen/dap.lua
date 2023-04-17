@@ -5,6 +5,7 @@ dap.adapters.cppdbg = {
   command = '/home/mafo/dotfiles/extension/debugAdapters/bin/OpenDebugAD7',
 }
 
+require('dap.ext.vscode').load_launchjs(nil, { cppdbg = {'c', 'cpp'}})
 dap.configurations.cpp = {
   {
     name = "Launch file",
@@ -29,7 +30,6 @@ dap.configurations.cpp = {
     end,
   },
 }
-require('dap.ext.vscode').load_launchjs(nil, { cppdbg = {'c', 'cpp'}})
 
 require("dapui").setup({
   sidebar = {
@@ -42,6 +42,7 @@ require("dapui").setup({
       },
       { id = "breakpoints", size = 0.25 },
       { id = "watches", size = 0.25 },
+      "stacks",
     },
     size = 40,
     position = "left", -- Can be "left", "right", "top", "bottom"
