@@ -3,6 +3,7 @@ call plug#begin()
     Plug 'folke/tokyonight.nvim'
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release' }
 
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/nvim-treesitter-context'
@@ -28,6 +29,10 @@ call plug#begin()
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
+    Plug 'folke/trouble.nvim'
+
+    Plug 'Civitasv/cmake-tools.nvim'
+
 call plug#end()
 
 " Everything else...
@@ -37,3 +42,4 @@ lua require("theprimeagen")
 " let g:airline_powerline_fonts = 0
 let g:airline_theme='lucius'
 let g:airline#extensions#tabline#enabled = 1
+

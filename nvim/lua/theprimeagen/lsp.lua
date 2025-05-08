@@ -44,6 +44,14 @@ require("mason-lspconfig").setup({
                 }
             }
         end,
+
+        ["clangd"] = function()
+            local lspconfig = require("lspconfig")
+            lspconfig.clangd.setup {
+                capabilities = capabilities,
+                cmd = { "clangd", "--background-index" },
+            }
+        end,
     }
 })
 
@@ -66,17 +74,13 @@ cmp.setup({
         { name = 'luasnip' }, -- For luasnip users.
     }, {
         { name = 'buffer' },
-    })
+    }),
+    experimental = {
+        ghost_text = true,
+    },
 })
 
 vim.diagnostic.config({
     -- update_in_insert = true,
-    float = {
-        focusable = false,
-        style = "minimal",
-        border = "rounded",
-        source = "always",
-        header = "",
-        prefix = "",
-    },
+    float = true
 })
